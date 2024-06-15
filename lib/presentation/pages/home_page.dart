@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/weather.dart';
@@ -10,6 +9,7 @@ import 'package:weather_bloc/core/cubit/weather_state.dart';
 import 'package:weather_bloc/core/utility/time.dart';
 import 'package:weather_bloc/presentation/theme/text_styles.dart';
 import 'package:weather_bloc/presentation/widget/background.dart';
+import 'package:weather_bloc/presentation/widget/find_city_sheet.dart';
 import 'package:weather_bloc/presentation/widget/weather_prop_content.dart';
 
 class HomePage extends StatelessWidget {
@@ -23,6 +23,7 @@ class HomePage extends StatelessWidget {
         extendBodyBehindAppBar: true,
         backgroundColor: Colors.black,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
@@ -60,10 +61,45 @@ class HomePage extends StatelessWidget {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              '📍 ${weather?.areaName}, ${weather?.country}',
-                              style:
-                                  TextStyles.s.copyWith(color: Colors.white60),
+                            // ------------------ BUTTON TO REFRESH or SEARCH BY CITYNAME
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextButton(
+                                  style: const ButtonStyle(
+                                      padding: WidgetStatePropertyAll(
+                                          EdgeInsets.all(0)),
+                                      elevation: WidgetStatePropertyAll(3)),
+                                  onPressed: () => context
+                                      .read<WeatherCubit>()
+                                      .getWeatherByPosition(),
+                                  child: Text(
+                                    '📍 ${weather?.areaName}, ${weather?.country}',
+                                    style: TextStyles.s
+                                        .copyWith(color: Colors.white60),
+                                  ),
+                                ),
+                                IconButton(
+                                  style: const ButtonStyle(
+                                      backgroundColor: WidgetStatePropertyAll(
+                                          Colors.white54)),
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        context: context,
+                                        builder: (context) =>
+                                            SingleChildScrollView(
+                                                padding: EdgeInsets.only(
+                                                    bottom:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets
+                                                            .bottom),
+                                                child: const FindCitySheet()));
+                                  },
+                                  icon: const Icon(Icons.search),
+                                  color: Colors.white,
+                                )
+                              ],
                             ),
 
                             // ----------- CONDITION IF THE APPS NOT CONNECTED TO THE INTERNET
@@ -73,7 +109,6 @@ class HomePage extends StatelessWidget {
                                 style: TextStyles.sBold
                                     .copyWith(color: Colors.white54),
                               ),
-                            const SizedBox(height: 10),
                             Text(
                               greeting.sayGreeting,
                               style: TextStyles.mBold,
