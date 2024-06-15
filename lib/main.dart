@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_bloc/core/cubit/greeting_cubit.dart';
 
 import 'package:weather_bloc/core/cubit/internet_connection_cubit.dart';
+import 'package:weather_bloc/core/cubit/weather_cubit.dart';
 import 'package:weather_bloc/presentation/pages/home_page.dart';
 
 void main() {
@@ -31,7 +32,14 @@ class MainApp extends StatelessWidget {
         BlocProvider<InternetConnectionCubit>(
             create: (context) =>
                 InternetConnectionCubit(connectivityPlus: connectivityPlus)),
-        BlocProvider<GreetingCubit>(create: (context) => GreetingCubit())
+        BlocProvider(
+          create: (context) => WeatherCubit(),
+          lazy: false,
+        ),
+        BlocProvider<GreetingCubit>(
+          create: (context) => GreetingCubit(),
+          lazy: false,
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

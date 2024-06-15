@@ -11,15 +11,15 @@ class TextStyles {
   static TextStyle get s => normal.copyWith(fontSize: 12);
   static TextStyle get sm => normal.copyWith(fontSize: 15);
   static TextStyle get m => normal.copyWith(fontSize: 20);
-  static TextStyle get ml => normal.copyWith(fontSize: 30);
-  static TextStyle get l => normal.copyWith(fontSize: 40);
-  static TextStyle get xl => normal.copyWith(fontSize: 60);
+  static TextStyle get ml => normal.copyWith(fontSize: 25);
+  static TextStyle get l => normal.copyWith(fontSize: 30);
+  static TextStyle get xl => normal.copyWith(fontSize: 40);
 
   static TextStyle get xsBold => xs.copyWith(fontWeight: FontWeight.bold);
   static TextStyle get sBold => s.copyWith(fontWeight: FontWeight.bold);
   static TextStyle get smBold => sm.copyWith(fontWeight: FontWeight.bold);
   static TextStyle get mBold => m.copyWith(fontWeight: FontWeight.bold);
-  static TextStyle get mlbold => ml.copyWith(fontWeight: FontWeight.bold);
+  static TextStyle get mlBold => ml.copyWith(fontWeight: FontWeight.bold);
   static TextStyle get lBold => l.copyWith(fontWeight: FontWeight.bold);
   static TextStyle get xlBold => xl.copyWith(fontWeight: FontWeight.bold);
 }
