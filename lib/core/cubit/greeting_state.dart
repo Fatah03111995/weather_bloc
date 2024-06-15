@@ -1,10 +1,11 @@
 part of 'greeting_cubit.dart';
 
-sealed class GreetingState extends Equatable {
-  const GreetingState();
+class GreetingState extends Equatable {
+  final Greeting greeting;
 
+  const GreetingState({required this.greeting});
+
+  String get sayGreeting => 'Good ${greeting.name}';
   @override
   List<Object> get props => [];
 }
-
-final class GreetingInitial extends GreetingState {}
