@@ -32,7 +32,8 @@ class WeatherCubit extends Cubit<WeatherState> {
       emitWeatherSuccess(weather);
     } catch (e) {
       emitWeatherFailure(e);
-      getWeatherByPosition();
+      Future.delayed(const Duration(seconds: 1))
+          .then((value) => getWeatherByPosition());
     }
   }
 
@@ -42,7 +43,6 @@ class WeatherCubit extends Cubit<WeatherState> {
 
   @override
   void onChange(Change<WeatherState> change) {
-    print(change);
     super.onChange(change);
   }
 }

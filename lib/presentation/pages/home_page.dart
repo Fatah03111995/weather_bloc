@@ -175,7 +175,9 @@ class HomePage extends StatelessWidget {
                       // ----------------- MAIN CONTENT END
                     ),
                   )
-                : Center(
+                : //------------ WILL BE CALLED IF WEATHER_FAILURE EMITTED
+                Center(
+                    // TODO : NEED HANDLING TO INFORM USER WITH MORE NICE UI
                     child: Text(
                     'ERROR, the City Is Not Found',
                     style: TextStyles.mlBold,
