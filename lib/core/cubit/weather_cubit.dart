@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:weather/weather.dart';
 import 'package:weather_bloc/core/cubit/weather_state.dart';
 import 'package:weather_bloc/core/data/data.dart';
@@ -22,26 +23,16 @@ class WeatherCubit extends Cubit<WeatherState> {
     }
   }
 
-  void getWeatherByCity({required context, required cityName}) async {
+  void getWeatherByCity(
+      {required BuildContext context, required String cityName}) async {
     try {
       emit(WeatherLoading());
       Weather weather =
           await WeatherFactory(apiKey).currentWeatherByCityName(cityName);
       emitWeatherSuccess(weather);
     } catch (e) {
-      ScaffoldMessenger.of(context).showMaterialBanner(
-        MaterialBanner(
-            content: const Text(
-                'Data Not Found, Please re check your input and try again'),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    getWeatherByPosition();
-                  },
-                  icon: const Icon(Icons.close))
-            ]),
-      );
+      emitWeatherFailure(e);
+      getWeatherByPosition();
     }
   }
 

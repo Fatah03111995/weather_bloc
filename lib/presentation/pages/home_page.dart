@@ -18,7 +18,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WeatherState weatherState = context.watch<WeatherCubit>().state;
-
     return Scaffold(
         extendBodyBehindAppBar: true,
         backgroundColor: Colors.black,
@@ -88,13 +87,7 @@ class HomePage extends StatelessWidget {
                                         isScrollControlled: true,
                                         context: context,
                                         builder: (context) =>
-                                            SingleChildScrollView(
-                                                padding: EdgeInsets.only(
-                                                    bottom:
-                                                        MediaQuery.of(context)
-                                                            .viewInsets
-                                                            .bottom),
-                                                child: const FindCitySheet()));
+                                            const FindCitySheet());
                                   },
                                   icon: const Icon(Icons.search),
                                   color: Colors.white,
@@ -184,7 +177,7 @@ class HomePage extends StatelessWidget {
                   )
                 : Center(
                     child: Text(
-                    'ERROR',
+                    'ERROR, the City Is Not Found',
                     style: TextStyles.mlBold,
                   )));
   }
